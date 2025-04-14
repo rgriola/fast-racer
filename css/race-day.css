@@ -1,0 +1,49 @@
+body {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#leaderboard {
+    width: 200px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#leaderboard h2 {
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+
+.leaderboard-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.leaderboard-color {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 1px solid #000;
+}
+
+.leaderboard-text {
+    font-size: 14px;
+}
+
+.race-track {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+canvas {
+    border: 1px solid #000;
+}

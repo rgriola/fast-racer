@@ -4,22 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fast Racer</title>
-    <link rel="stylesheet" href="./css/styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #leaderboard {
+            width: 200px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        #leaderboard h2 {
+            text-align: center;
+            margin: 0 0 10px 0;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .leaderboard-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border: 1px solid #000;
+        }
+
+        .leaderboard-text {
+            font-size: 14px;
+        }
+
+        .race-track {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
 </head>
 <body>
-    <h1>Fast Racer</h1>
-    <div id="controls">
-        <input type="text" id="player-name" placeholder="Enter your name" />
-        <input type="color" id="car-color" value="#ff0000" />
-        <button id="start-button">Start Race</button>
+    <div id="leaderboard">
+        <h2>Leaderboard</h2>
+        <div id="leaderboard-list">
+            <!-- Predefined placeholders for places 1–10 -->
+            <div class="leaderboard-item" id="place-1">#1 - </div>
+            <div class="leaderboard-item" id="place-2">#2 - </div>
+            <div class="leaderboard-item" id="place-3">#3 - </div>
+            <div class="leaderboard-item" id="place-4">#4 - </div>
+            <div class="leaderboard-item" id="place-5">#5 - </div>
+            <div class="leaderboard-item" id="place-6">#6 - </div>
+            <div class="leaderboard-item" id="place-7">#7 - </div>
+            <div class="leaderboard-item" id="place-8">#8 - </div>
+            <div class="leaderboard-item" id="place-9">#9 - </div>
+            <div class="leaderboard-item" id="place-10">#10 - </div>
+        </div>
     </div>
     <div class="race-track">
-        <canvas id="gameCanvas" width="800" height="400"></canvas>
-        <div id="starting-line"></div>
-        <div id="cars-container"></div>
+        <div>
+            <h1>Fast Racer</h1>
+            <p id="player-name-display"></p>
+            <div id="controls">
+                <input type="color" id="car-color" value="#ff0000" />
+                <button id="start-button">Start Race</button>
+            </div>
+            <canvas id="gameCanvas" width="800" height="400"></canvas>
+        </div>
     </div>
-    <div id="timer"></div>
-    <div id="results"></div>
-    <script type="module" src="./dist/main.js"></script>
+    <script>
+        // Ensure the player's name is set before accessing the page
+        window.onload = function () {
+            const playerName = localStorage.getItem('playerName');
+            console.log("Player Name:", playerName); // Debugging line
+            if (!playerName) {
+                alert('You must enter your name on the landing page first!');
+                window.location.href = 'index.html';
+            } else {
+                const playerNameDisplay = document.getElementById('player-name-display');
+                if (playerNameDisplay) {
+                    playerNameDisplay.textContent = `Player: ${playerName}`;
+                } else {
+                    console.error("Element with ID 'player-name-display' not found.");
+                }
+            }
+        };
+    </script>
+    <script type="module" src="./dist/main.js" defer></script>
 </body>
 </html>

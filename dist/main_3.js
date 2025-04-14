@@ -1,4 +1,4 @@
-/* Updated Apr 14, 2025 3:46pm */
+/* Updated Apr 14, 2025 */
 import { Car } from './game/car.js';
 import { Track } from './game/track.js';
 import { Race } from './race.js';
@@ -71,48 +71,39 @@ document.getElementById('start-button').addEventListener('click', () => {
 });
 // Populate the leaderboard before the race starts
 function populateLeaderboard() {
+    console.log('Populating leaderboard before the race starts...');
     const leaderboardList = document.getElementById('leaderboard-list');
-    if (!leaderboardList)
+    if (!leaderboardList) {
+        console.error('Leaderboard list element not found!');
         return;
+    }
     // Clear the leaderboard
     leaderboardList.innerHTML = '';
     // Populate the leaderboard with all cars
-    cars.forEach((car) => {
-        const item = document.createElement('div');
-        item.className = 'leaderboard-item';
-        const colorBox = document.createElement('div');
-        colorBox.className = 'leaderboard-color';
-        colorBox.style.backgroundColor = car.color;
-        const text = document.createElement('div');
-        text.className = 'leaderboard-text';
-        text.textContent = `${car.number} - ${car.name || 'B. Bot'}`;
-        item.appendChild(colorBox);
-        item.appendChild(text);
-        leaderboardList.appendChild(item);
+    cars.forEach((car, index) => {
+        const placeElement = document.getElementById(`place-${index + 1}`);
+        if (!placeElement) {
+            //console.error(`Place element for #${index + 1} not found!`);
+            return;
+        }
+        console.log(`Found place element for #${index + 1}`);
+        const colorBox = `<span style="display: inline-block; width: 20px; height: 20px; background-color: ${car.color}; border: 1px solid #000; margin-right: 10px;"></span>`;
+        placeElement.innerHTML = `${colorBox} ${car.number} - ${car.name || 'B. Bot'}`;
     });
 }
 // Update the leaderboard dynamically during the race
 function updateLeaderboard() {
-    const leaderboardList = document.getElementById('leaderboard-list');
-    if (!leaderboardList)
-        return;
-    // Clear the leaderboard
-    leaderboardList.innerHTML = '';
-    // Sort cars by total distance traveled
+    console.log('Updating leaderboard during the race...');
     const sortedCars = cars.slice().sort((a, b) => b.distanceTraveled - a.distanceTraveled);
-    // Populate the leaderboard with place numbers
+    // Update the leaderboard dynamically
     sortedCars.forEach((car, index) => {
-        const item = document.createElement('div');
-        item.className = 'leaderboard-item';
-        const colorBox = document.createElement('div');
-        colorBox.className = 'leaderboard-color';
-        colorBox.style.backgroundColor = car.color;
-        const text = document.createElement('div');
-        text.className = 'leaderboard-text';
-        text.textContent = `#${index + 1} - ${car.number} - ${car.name || 'B. Bot'} - ${car.distanceTraveled.toFixed(2)}m`;
-        item.appendChild(colorBox);
-        item.appendChild(text);
-        leaderboardList.appendChild(item);
+        const placeElement = document.getElementById(`place-${index + 1}`);
+        if (!placeElement) {
+            //console.error(`Place element for #${index + 1} not found!`);
+            return;
+        }
+        const colorBox = `<span style="display: inline-block; width: 20px; height: 20px; background-color: ${car.color}; border: 1px solid #000; margin-right: 10px;"></span>`;
+        placeElement.innerHTML = `${colorBox} ${car.number} - ${car.name || 'B. Bot'} - ${car.distanceTraveled.toFixed(2)}m`;
     });
 }
 // Helper function to convert speed from mph to pixels per frame
@@ -145,3 +136,8 @@ function gameLoop() {
     });
     requestAnimationFrame(gameLoop); // Continue the game loop
 }
+// Ensure the leaderboard is populated when the window loads
+window.onload = () => {
+    console.log('Window loaded. Initializing leaderboard...');
+    populateLeaderboard();
+};
