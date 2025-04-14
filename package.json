@@ -1,0 +1,20 @@
+{
+  "name": "car-racing-game",
+  "version": "1.0.0",
+  "description": "A racing game where cars compete on a track.",
+  "main": "src/main.ts",
+  "scripts": {
+    "start": "ts-node src/main.ts",
+    "build": "tsc",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "dependencies": {
+    "typescript": "^4.5.4",
+    "ts-node": "^10.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.7"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
