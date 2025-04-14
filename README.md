@@ -51,3 +51,7 @@ car-racing-game
 
 ## Contributing
 Feel free to submit issues or pull requests to enhance the game!
+
+Real-time leaderboard: Display the current positions of the cars during the race.
+Dynamic track size: Allow the track dimensions to be configurable.
+Car customization: Let players choose car shapes or additional attributes.

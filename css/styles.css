@@ -1,55 +1,46 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-    text-align: center;
-  }
-  
-  .landing-page, .race-day {
-    padding: 20px;
-  }
-  
-  h1 {
-    font-size: 2.5em;
-    color: #ff4500;
-  }
-  
-  button {
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #ff4500;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  button:hover {
-    background-color: #e63900;
-  }
-  
-  form {
-    margin: 20px 0;
-  }
-  
-  label {
-    display: block;
-    margin: 10px 0 5px;
-  }
-  
-  input[type="text"], input[type="color"] {
-    padding: 10px;
-    font-size: 1em;
-    margin-bottom: 10px;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  ul li {
-    margin: 5px 0;
-  }
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+  margin: 20px auto;
+  border: 2px solid black;
+  background-color: lightgray;
+}
+
+.race-track {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  margin: 0 auto;
+  background-color: gray;
+  border: 5px solid black;
+  border-radius: 0%;
+  overflow: hidden;
+}
+
+#cars-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.car {
+  position: absolute;
+  width: 20px; /* Scaled down from 8 feet */
+  height: 40px; /* Scaled down from 19 feet */
+  border-radius: 3px;
+}
+
+#timer {
+  font-size: 1.5em;
+  margin: 20px 0;
+}
+
+#results {
+  margin-top: 20px;
+}

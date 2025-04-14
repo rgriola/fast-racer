@@ -1,52 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Race Day - Fast Racer</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Racer</title>
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-  <div class="race-day">
-    <h1>Race Day</h1>
-    <form id="player-form">
-      <label for="player-name">Enter Your Name:</label>
-      <input type="text" id="player-name" name="player-name" required>
-      
-      <label for="car-color">Choose Your Car Color:</label>
-      <input type="color" id="car-color" name="car-color" value="#ff0000">
-      
-      <button type="button" onclick="startGame()">Start Race</button>
-    </form>
-    
-    <div id="racers-list">
-      <h2>Racers:</h2>
-      <ul>
-        <li>Player (You)</li>
-        <li>Racer 1</li>
-        <li>Racer 2</li>
-        <li>Racer 3</li>
-        <li>Racer 4</li>
-        <li>Racer 5</li>
-        <li>Racer 6</li>
-        <li>Racer 7</li>
-        <li>Racer 8</li>
-        <li>Racer 9</li>
-        <li>Racer 10</li>
-      </ul>
+    <h1>Fast Racer</h1>
+    <div id="controls">
+        <input type="text" id="player-name" placeholder="Enter your name" />
+        <input type="color" id="car-color" value="#ff0000" />
+        <button id="start-button">Start Race</button>
     </div>
-  </div>
-  <script>
-    function startGame() {
-      const playerName = document.getElementById('player-name').value;
-      const carColor = document.getElementById('car-color').value;
-      if (playerName) {
-        alert(`Welcome ${playerName}! Your car color is ${carColor}. Get ready to race!`);
-        // Logic to start the race can be added here
-      } else {
-        alert('Please enter your name to start the race.');
-      }
-    }
-  </script>
+    <div class="race-track">
+        <canvas id="gameCanvas" width="800" height="400"></canvas>
+        <div id="starting-line"></div>
+        <div id="cars-container"></div>
+    </div>
+    <div id="timer"></div>
+    <div id="results"></div>
+    <script type="module" src="./dist/main.js"></script>
 </body>
 </html>

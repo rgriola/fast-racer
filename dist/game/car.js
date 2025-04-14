@@ -1,11 +1,5 @@
 export class Car {
-    name: string;
-    x: number;
-    y: number;
-    color: string;
-    speed: number;
-  
-    constructor(name: string, x: number, y: number, color: string, speed: number) {
+    constructor(name, x, y, color, speed) {
         this.name = name;
         this.x = x;
         this.y = y;
@@ -13,15 +7,13 @@ export class Car {
         this.speed = speed;
         console.log(`Car created: ${name} at (${x}, ${y}) with color ${color} and speed ${speed.toFixed(2)} pixels/frame`);
     }
-  
-    move(dx: number, dy: number) {
+    move(dx, dy) {
         this.x += dx;
         this.y += dy;
     }
-  
-    draw(context: CanvasRenderingContext2D) {
+    draw(context) {
         console.log(`Drawing car ${this.name} at (${this.x}, ${this.y}) with color ${this.color}`);
         context.fillStyle = this.color; // Use the car's color
         context.fillRect(this.x - 10, this.y - 5, 20, 10); // Draw a rectangle for the car
     }
-  }
+}
