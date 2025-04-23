@@ -9,31 +9,47 @@
 <body>
     <div class="container">
         <header>
-            <!-- ...existing header content... -->
-            <div id="race-timer" class="race-timer">00:00.00</div>
-            <h1>Fast Racer</h1>
+            <div class="header-content">
+                <div id="race-timer" class="race-timer">00:00.00</div>
+                <h1 class="game-title">Fast Racer</h1>
+            </div>
         </header>
         <nav>
-            
         </nav>
         <main> 
             <aside>
                 <div id="Leaderboard">
-                <h2>Leaderboard</h2>
-                <div id="leaderboard-list">
-                    <dix class="leaderboard-item">Place</dix><div class="leaderboard-item">Racer</div><div class="leaderboard-item">Car No.</div><div class="leaderboard-item">LAP</div><div class="leaderboard-item">MPH</div>
-                    <!-- Predefined placeholders for places 1–10 -->
-                    <div id="place-1">#1 - </div>
-                    <div id="place-2">#2 - </div>
-                    <div id="place-3">#3 - </div>
-                    <div id="place-4">#4 - </div>
-                    <div id="place-5">#5 - </div>
-                    <div id="place-6">#6 - </div>
-                    <div id="place-7">#7 - </div>
-                    <div id="place-8">#8 - </div>
-                    <div id="place-9">#9 - </div>
-                    <div id="place-10">#10 - </div>
-                </div>
+                    <h2>Leaderboard</h2>
+                    <div id="leaderboard-list">
+                        <div class="leaderboard-header">
+                            <div class="header-item">PL</div>
+                            <div class="header-item">Racer</div>
+                            <div class="header-item">No.</div>
+                            <div class="header-item">LAP</div>
+                            <div class="header-item">MPH</div>
+                        </div>
+                        <!-- Predefined placeholders for all 20 positions -->
+                        <div id="place-1"></div>
+                        <div id="place-2"></div>
+                        <div id="place-3"></div>
+                        <div id="place-4"></div>
+                        <div id="place-5"></div>
+                        <div id="place-6"></div>
+                        <div id="place-7"></div>
+                        <div id="place-8"></div>
+                        <div id="place-9"></div>
+                        <div id="place-10"></div>
+                        <div id="place-11"></div>
+                        <div id="place-12"></div>
+                        <div id="place-13"></div>
+                        <div id="place-14"></div>
+                        <div id="place-15"></div>
+                        <div id="place-16"></div>
+                        <div id="place-17"></div>
+                        <div id="place-18"></div>
+                        <div id="place-19"></div>
+                        <div id="place-20"></div>
+                    </div>
                 </div>
             </aside>
             <section>
@@ -69,9 +85,7 @@
         if (playerNameDisplay) {
             playerNameDisplay.textContent = `Racer: ${playerName} (#${playerCarNumber})`;
         }
-
     };
-
     </script>
     <script type="module" src="./dist/main.js" defer></script>
 </body>

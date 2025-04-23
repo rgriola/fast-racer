@@ -1,161 +1,333 @@
-*{
-    margin:0;
+/* Reset and root styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+/* HTML Elements */
 body {
-    display: flex;
-    flex-direction: row;
-    font-family: Arial, sans-serif;
     background: #8accf3;
-    text-align: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
 }
 
-.container{ /*.  */
-	width: 1200px;
-    background: #a5dbfa;
-   /*  display: flex; */
-
+/* Update canvas size */
+canvas {
+    border: 4px solid #ffffff;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
-header{             
-	height: 75px;
+footer {
+    background: #000000;
+    color: #ffffff;
+    height: 50px;
+}
+
+header {
     background: #66abd2;
-}
-
-nav{
-	height:25px;
-    background: #3b89b6;
-    color: #ffffff;
-}
-
-main{
-	height:auto;
-    background: #36b3fb;
-}
-
-aside{
-	width:25%;
-	height:auto;
-	float:left;
-    background: #a3ddff;
-}
-section{
-	width:75%;
-	height:auto;
-	float:left;
-	background: #b3e3ff;
-}
-.clear{
-	clear:both;    
-}
-
-footer{
-	height:50px;
-    color: #ffffff;
-	background:#000000;
-}
-
-/* LEADER BOARD */
-#leaderboard {
-    display: flex;
-}
-
-#leaderboard h2 {
-    display: flex;
-    /*text-align: center;
-    margin: 0 0 10px 0;*/
-}
-
-.leaderboard-item {
-    display: flex;
-    float:left;
-    padding: 5px;
-}
-
-.leaderboard-color {
-    width: 20px;
-    height: 20px;
-    margin: 10px;
-    display: flex;
-}
-
-.leaderboard-text {
-    font-size: 14px;
-}
-
-.racer-name, .car-number, .distance {
-    color: #ffffff;
-    width: 100%;
-    height: auto;
-    margin: auto;
-   /* display: flex; */
-    text-align: center;
-}
-
-.position {
-    width: 20px;
-    height: 20px;
-    margin: 10px;
-    display: flex;
-}
-
-/* RACE TRACK */
-.race-track {
-    flex: 1;
+    height: 75px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5px;
-    stroke: 5px solid #81dafbd2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-canvas {
-    border: 4px solid #ffffff;
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    padding: 0 20px;
 }
 
-#pause-button, #restart-button {
-    margin-left: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+/* Content layout */
+main {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    background: #36b3fb;
 }
 
-#pause-button:disabled, #restart-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+nav {
+    background: #3b89b6;
+    color: #ffffff;
+    height: 25px;
 }
 
-/* RACE TIMER */
+/* Layout Classes */
+.clear {
+    clear: both;
+}
+
+/* Update container width and add flex */
+/* Main container structure */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #a5dbfa;
+    width: 100%;
+}
+
+/* Sidebar (Leaderboard) */
+/* Sidebar */
+aside {
+    background: #a3ddff;
+    width: 300px;
+    min-width: 300px;
+    height: calc(100vh - 100px);
+    padding: 10px;
+    /* Remove overflow from aside */
+}
+
+
+/* Update section (race track) styles */
+/* Main content (Race track) */
+/* Main content area */
+section {
+    flex: 1;
+    display: flex;
+    background: #b3e3ff;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Race Components */
+/* Update race track container */
+.race-track {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;  /* Changed from center to flex-start */
+    margin-top: 0;           /* Added to ensure top alignment */
+}
+
+.controls {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    margin-bottom: 10px;    /* Added spacing between controls and track */
+}
+/*  race timer */
 .race-timer {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+    color: white;
     font-family: monospace;
     font-size: 24px;
     font-weight: bold;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.7);
     padding: 10px 20px;
-    border-radius: 5px;
-    position: fixed; 
-    top: 20px;
-    left: 20px;
+    min-width: 120px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+/* Leaderboard Styles */
+#Leaderboard {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 100%; /* Change to 100% to fill aside */
+    margin: 0;
+    padding: 10px;
+    overflow-y: auto; /* Keep overflow only on Leaderboard */
+}
+
+/* Leaderboard header */
+#Leaderboard h2 {
+    color: #2c3e50;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard-header {
+    background: #2c3e50;
+    border-radius: 4px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 10px;
+    position: sticky; /* Keep header visible when scrolling */
+    top: 0;
+    z-index: 1;
+}
+
+#leaderboard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-bottom: 10px; /* Add some padding at bottom */
+}
+
+
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    margin: 4px 0;
+    border-radius: 4px;
+}
+
+/* Player highlight in leaderboard */
+.leaderboard-item.player-row {
+    border: 2px solid #ffd700; /* Gold border */
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.5); /* Golden glow */
+    position: relative; /* For pseudo-element positioning */
+}
+
+.leaderboard-item.player-row::before {
+    content: "👑"; /* Crown emoji */
+    position: absolute;
+    left: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+}
+
+.leaderboard-item.player-row > div {
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Style for empty rows */
+.empty-row {
+    background: rgba(0, 0, 0, 0.1) !important;
+    opacity: 0.7;
+}
+
+/* Update header items to match */
+.header-item {
+    flex: 1;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.game-title {
+    color: white;
+    font-size: 32px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 0;
+}
+
+/* LEADER BOARD */
+.leaderboard-item:hover {
+    background: rgba(44, 62, 80, 0.1);
+}
+
+/* Leaderboard items */
+.leaderboard-item > div {
+    flex: 1;
+    font-size: 12px;  /* Reduced from 14px */
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 4px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.position {
+    flex: 0 0 40px !important;
+}
+
+.racer-info {
+    flex: 2 !important;
+    font-weight: 500;
+}
+
+.racer-name {
+    flex: 2 !important;
+    text-align: left;
+}
+
+.car-number {
+    flex: 1 !important;
+}
+
+.laps, .distance {
+    flex: 1 !important;
+}
+
+/* Button Styles */
 .game-button {
     background-color: #3498db;
-    color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
     border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px;
+    padding: 12px 24px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+.game-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+#start-button {
+    background-color: #27ae60;
+}
+
+#start-button:hover {
+    background-color: #219a52;
+}
+
+#pause-button {
+    background-color: #e74c3c;
+}
+
+#pause-button:hover {
+    background-color: #c0392b;
+}
+
+
+#pause-button,
+#restart-button {
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+    padding: 10px 20px;
+}
+
+#pause-button:disabled,
+#start-button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+    box-shadow: none;
 }
 
 #restart-button {
     background-color: #2c3e50;
-    margin-left: 10px;
 }
 
-#restart-button:disabled {
-    background-color: #95a5a6;
-    cursor: not-allowed;
-    opacity: 0.6;
+#restart-button:hover:not(:disabled) {
+    background-color: #34495e;
 }

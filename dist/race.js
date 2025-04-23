@@ -2,6 +2,8 @@ import { Timer } from './js/timer.js';
 export class Race {
     constructor(cars, track) {
         this.TWO_PI = Math.PI * 2;
+        this.PIXELS_TO_FEET = 0.5; // 1 pixel = 0.5 feet (adjust as needed)
+        this.FEET_TO_MILES = 1 / 5280; // Standard conversion
         this.DEBUG = true;
         this.START_LINE = {
             X: 400,
@@ -20,6 +22,12 @@ export class Race {
         this.START_LINE.X = track.startLine.x;
         this.START_LINE.Y_TOP = track.startLine.yTop;
         this.START_LINE.Y_BOTTOM = track.startLine.yBottom;
+        this.trackGeometry = {
+            centerX: track.centerX,
+            centerY: track.centerY,
+            semiMajorAxis: track.semiMajorAxis,
+            semiMinorAxis: track.semiMinorAxis
+        };
         // Initialize crossing times
         cars.forEach(car => this.START_LINE.lastCrossing.set(car, 0));
         if (this.DEBUG) {
@@ -29,18 +37,20 @@ export class Race {
     updateRace() {
         // updates timer
         this.timer.update();
-        const centerX = this.track.centerX;
-        const centerY = this.track.centerY;
-        const semiMajorAxis = this.track.semiMajorAxis;
-        const semiMinorAxis = this.track.semiMinorAxis;
+        /*
+                const centerX = this.track.centerX;
+                const centerY = this.track.centerY;
+                const semiMajorAxis = this.track.semiMajorAxis;
+                const semiMinorAxis = this.track.semiMinorAxis;
+        */
         this.cars.forEach((car, index) => {
             const prevPos = this.previousPositions[index];
-            const angularSpeed = car.speed / semiMajorAxis;
+            const angularSpeed = car.speed / this.trackGeometry.semiMajorAxis;
             this.angles[index] -= angularSpeed;
             // Normalize angle between 0 and 2π
             this.angles[index] = ((this.angles[index] % this.TWO_PI) + this.TWO_PI) % this.TWO_PI;
-            const newX = centerX + semiMajorAxis * Math.cos(this.angles[index]);
-            const newY = centerY - semiMinorAxis * Math.sin(this.angles[index]);
+            const newX = this.trackGeometry.centerX + this.trackGeometry.semiMajorAxis * Math.cos(this.angles[index]);
+            const newY = this.trackGeometry.centerY - this.trackGeometry.semiMinorAxis * Math.sin(this.angles[index]);
             // Calculate distance traveled
             const dx = newX - prevPos.x;
             const dy = newY - prevPos.y;

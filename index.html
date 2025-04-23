@@ -7,33 +7,37 @@
     <link rel="stylesheet" href="./css/styles.css">
     <script>
         function validateAndStartRace() {
-            const playerName = document.getElementById('player-name').value.trim();
+            const playerName = document.getElementById('player-name').value.trim().toUpperCase();
             const carNumber = document.getElementById('car-number').value.trim();
-            const nameRegex = /^[a-zA-Z0-9]+$/; // Only letters and numbers for the name
-            const numberRegex = /^[0-9]{1,2}$/; // Only numbers (0-99) for the car number
+            const carColor = document.getElementById('car-color').value; // Get selected color
 
-            if (!nameRegex.test(playerName)) {
-                alert('Please enter a valid name (letters and numbers only).');
-                return;
-            }
+    // Updated regex to allow spaces and more characters
+    const nameRegex = /^[A-Z0-9\s]{1,12}$/; // Allows uppercase letters, numbers, and spaces
+    const numberRegex = /^[0-9]{1,2}$/;     // Only numbers (0-99) for car number
 
-            if (!numberRegex.test(carNumber)) {
-                alert('Please enter a valid car number (0-99).');
-                return;
-            }
+    if (!nameRegex.test(playerName)) {
+        alert('Please enter a valid name (up to 12 characters, letters and numbers only).');
+        return;
+    }
 
-            // Store the player's name and car number in localStorage
-            localStorage.setItem('playerName', playerName);
-            localStorage.setItem('playerCarNumber', carNumber);
-            window.location.href = 'race-day.html';
-        }
+    if (!numberRegex.test(carNumber)) {
+        alert('Please enter a valid car number (0-99).');
+        return;
+    }
 
+    // Store all player data
+    localStorage.setItem('playerName', playerName);
+    localStorage.setItem('playerCarNumber', carNumber);
+    localStorage.setItem('playerCarColor', carColor); // Store color
+    
+    window.location.href = 'race-day.html';
+}
         function updatePreview() {
-            const playerName = document.getElementById('player-name').value.trim();
+            const playerName = document.getElementById('player-name').value.trim().toUpperCase();
             const carNumber = document.getElementById('car-number').value.trim();
             const carColor = document.getElementById('car-color').value;
 
-            // Update the title
+            // This live-populates as the player types their name.
             const title = document.getElementById('title');
             title.textContent = playerName ? `${playerName}'s Fast Racer` : 'Fast Racer';
 
@@ -49,7 +53,9 @@
     <h1 id="title">Fast Racer</h1>
     <div class="inputbox">
         <label for="player-name">Fast Racer Name:</label>
-        <input type="text" id="player-name" placeholder="Be Creative" oninput="updatePreview()" />
+        <input type="text" id="player-name" placeholder="Be Creative" 
+        maxlength="12"
+        oninput="updatePreview()" />
     </div>
 <div class="inputbox">
     <label for="car-number">Racer Number:</label>

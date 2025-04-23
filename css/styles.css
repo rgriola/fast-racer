@@ -1,18 +1,8 @@
+/* HTML Elements */
 body {
   font-family: Arial, sans-serif;
   text-align: center;
   background: #8accf3;
-}
-
-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-label{
-padding: 10px;
-cursor: pointer;
 }
 
 canvas {
@@ -22,58 +12,65 @@ canvas {
   background-color: lightgray;
 }
 
-.race-track {
-  position: relative;
-  width: 800px;
-  height: 600px;
-  margin: 0 auto;
-  background-color: gray;
-  border: 5px solid black;
-  border-radius: 0%;
-  overflow: hidden;
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#cars-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
+label {
+  padding: 10px;
+  cursor: pointer;
 }
 
-.car {
-  position: absolute;
-  width: 20px; /* Scaled down from 8 feet */
-  height: 40px; /* Scaled down from 19 feet */
-  border-radius: 3px;
+/* Classes (alphabetically) */
+
+.inputbox {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#timer {
-  font-size: 1.5em;
-  margin: 20px 0;
-}
-
-#results {
-  margin-top: 20px;
-}
-
-#car-preview {
-  margin-top: 20px;
+.inputbox input[type="text"] {
+  width: 250px;
+  height: 40px;
   text-align: center;
+  padding: 8px 12px;
+  font-size: 18px;
+  border: 2px solid #2c3e50;
+  border-radius: 5px;
+  margin-top: 8px;
+}
+
+.inputbox input[type="color"] {
+  width: 100px;
+  height: 40px;
+  padding: 4px;
+  border: 2px solid #2c3e50;
+  border-radius: 5px;
+}
+
+.inputbox label {
+  font-size: 20px;
+  margin-bottom: 5px;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+/* IDs (alphabetically) */
+#car-color {
+  display: inline-block;
+  width: 100px;
+  height: 75px;
+  border: 2px solid black;
+  position: relative;
 }
 
 #car-display {
   display: inline-block;
   width: 100px;
   height: 50px;
-  border: 2px solid black;
-  position: relative;
-}
-
-#car-color {
-  /* margin: 10px; */
-  /* padding: 15px; */
-  display: inline-block;
-  width: 100px;
-  height: 75px;
   border: 2px solid black;
   position: relative;
 }
@@ -88,19 +85,44 @@ canvas {
   color: white;
 }
 
-/* from a user */
-.inputbox {
-  background: color #6daed4;;
-  padding:10px;
-  display:flex;
-  flex-direction: column;
-  /* flex-wrap: wrap; */
-  justify-content:center;
-  align-items:center;
-  height: 50px;
-  }
-  
-  #search {
-    text-align:center;
-    /* if you want center text also */
-  }
+#car-preview {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#cars-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* I don't think this is used.  */
+.race-track {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  margin: 0 auto;
+  background-color: gray;
+  border: 5px solid black;
+  border-radius: 0%;
+  overflow: hidden;
+}
+.car {
+  position: absolute;
+  width: 20px; /* Scaled down from 8 feet */
+  height: 40px; /* Scaled down from 19 feet */
+  border-radius: 3px;
+}
+
+#results {
+  margin-top: 20px;
+}
+
+#search {
+  text-align: center;
+}
+
+#timer {
+  font-size: 1.5em;
+  margin: 20px 0;
+}

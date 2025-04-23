@@ -1,6 +1,6 @@
 {
-  "name": "car-racing-game",
-  "version": "1.0.0",
+  "name": "fast-racer",
+  "version": "1.1.0",
   "description": "A racing game where cars compete on a track.",
   "main": "src/main.ts",
   "scripts": {

@@ -48,64 +48,7 @@ startButton.addEventListener('click', () => {
     requestAnimationFrame(gameLoop);
 });
 
-/*
-// Update initializeRace to handle car creation
-function initializeRace() {
-    // Clear existing cars and canvas
-    cars.length = 0;
-        if (ctx) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            track.draw(ctx);
-        }
-
-    // Define car positioning
-    const startX = 400
-    //const startX = track.centerX - (2 * columnSpacing);
-    const startY = 20
-    //const startY = track.centerY - rowSpacing;
-
-    // Get player info
-    const playerName = localStorage.getItem('playerName');
-    const playerCarNumber = localStorage.getItem('playerCarNumber');
-    const carColor = (document.getElementById('car-color') as HTMLInputElement)?.value || '#ff0000';
-
-    if (playerName && playerCarNumber) {
-        // Initialize player car
-        const playerSpeedMph = 140 + Math.random() * 30; // 140-170 mph range
-        //const playerSpeedMph = 125 + Math.random() * 45;
-        const playerSpeed = convertMphToPixelsPerFrame(playerSpeedMph);
-        cars.push(new Car(playerName, startX, startY, carColor, playerSpeed, playerCarNumber));
-        drawCarByIndex(0); // <-- Draw player car immediately
-
-        // Generate AI cars
-        const usedNumbers = new Set<number>([parseInt(playerCarNumber)]);
-        
-        // Initialize AI cars
-        for (let i = 1; i <= 9; i++) {
-        //for (let i = 1; i <= 2; i++) {
-            const randomSpeedMph = 140 + Math.random() * 30; // Same range for AI cars
-            //const randomSpeedMph = 125 + Math.random() * 45; // Random speed between 125 and 170 mph
-            const speed = convertMphToPixelsPerFrame(randomSpeedMph);
-            const color = getRandomColor();
-            const number = generateUniqueNumber(usedNumbers).toString();
-            cars.push(new Car(`AI Racer: ${i}`, startX, startY, color, speed, number));
-            drawCarByIndex(i); // this puts all the cars at the start line very top
-            console.log(`AI Car: ${i}, color: ${color}, pixPFrame: ${speed}, number: ${number}`);
-        }
-
-        // Hide restart button
-        restartButton.style.display = 'none';
-        // Initialize leaderboard with all cars
-        updateLeaderboard();
-    }
-    
-    // Set initial game state
-    gameState.raceStarted = false;
-    gameState.isFinished = false;  // Reset finish state
-    pauseButton.disabled = true;
-}
-    */
-
+//// Game is initiallized. 
 function initializeRace() {
     // Clear existing cars and canvas
     cars.length = 0;
@@ -124,7 +67,7 @@ function initializeRace() {
     // Get player info
     const playerName = localStorage.getItem('playerName');
     const playerCarNumber = localStorage.getItem('playerCarNumber');
-    const carColor = (document.getElementById('car-color') as HTMLInputElement)?.value || '#ff0000';
+    const carColor = localStorage.getItem('playerCarColor') || '#ff0000'; // Get stored color or default to red
 
     if (playerName && playerCarNumber) {
         // Initialize player car with updated speed range
@@ -140,7 +83,7 @@ function initializeRace() {
         const usedNumbers = new Set<number>([parseInt(playerCarNumber)]);
 
         // Initialize AI cars with proper spacing
-        for (let i = 1; i <= 9; i++) {
+        for (let i = 1; i <= 19; i++) {
             const randomSpeedMph = 140 + Math.random() * 30;
             const speed = convertMphToPixelsPerFrame(randomSpeedMph);
             const color = getRandomColor();
@@ -187,7 +130,6 @@ const gameState: GameState = {
     totalLaps: 3  
 };
 
-
 // Pause button setup
 // const pauseButton = document.getElementById('pause-button') as HTMLButtonElement;
 pauseButton.addEventListener('click', () => {
@@ -209,7 +151,9 @@ function convertMphToPixelsPerFrame(mph: number): number {
 
 // Generate random color for AI cars
 function getRandomColor(): string {
-    return `#${Math.floor(Math.random()*16777215).toString(16)}`;
+    const color = Math.floor(Math.random()*16777215).toString(16);
+    // Pad with leading zeros if needed to ensure 6 characters
+    return `#${color.padStart(6, '0')}`;
 }
 
 // Simplify start button event listener
@@ -384,17 +328,33 @@ function updateLeaderboardDisplay(racers: {
     color: string;
     laps: number;
 }[]) {
-    racers.forEach((racer, index) => {
-        const place = document.getElementById(`place-${index + 1}`);
+    // Fill all 20 slots
+    for (let i = 1; i <= 20; i++) {
+        const place = document.getElementById(`place-${i}`);
+        const racer = racers[i - 1]; // Get racer if exists
+
         if (place) {
-            place.innerHTML = `
+            if (racer) {
+                // Populate with racer data
+                place.innerHTML = `
                     <div class="leaderboard-item" style="background: ${racer.color}">
-                        <div class="position">${index + 1}</div>
+                        <div class="position">${i}</div>
                         <div class="racer-name">${racer.name}</div>
-                        <div class="racer-name">${racer.number}</div>
-                        <div class="racer-name">${(racer.laps || 0) + 1} / ${gameState.totalLaps}</div>
-                        <div class="racer-name">${racer.distance.toFixed(1)}ft</div>
+                        <div class="car-number">${racer.number}</div>
+                        <div class="laps">${(racer.laps || 0) + 1}/${gameState.totalLaps}</div>
+                        <div class="distance">${racer.distance.toFixed(0)}ft</div>
                     </div>`;
-                }
-        });
+            } else {
+                // Empty placeholder row
+                place.innerHTML = `
+                    <div class="leaderboard-item empty-row">
+                        <div class="position">${i}</div>
+                        <div class="racer-name">--</div>
+                        <div class="car-number">--</div>
+                        <div class="laps">--/--</div>
+                        <div class="distance">--</div>
+                    </div>`;
+            }
+        }
+    }
 }
