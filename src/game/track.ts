@@ -1,20 +1,33 @@
 /* Update Apr 14, 2025 12:13pm */ 
 
 export class Track {
-    centerX: number;
-    centerY: number;
-    semiMajorAxis: number;
-    semiMinorAxis: number;
-    lanes: number;
-    carWidth: number;
+    readonly centerX: number;
+    readonly centerY: number;
+    readonly semiMajorAxis: number;
+    readonly semiMinorAxis: number;
+    readonly lanes: number;
+    readonly carWidth: number;
+
+    readonly startLine = {
+        x: 0,
+        yTop: 0,
+        yBottom: 0
+    };
 
     constructor(canvas: HTMLCanvasElement, lanes: number, carWidth: number) {
         this.centerX = canvas.width / 2;
         this.centerY = canvas.height / 2;
-        this.semiMajorAxis = canvas.width / 2 - 20;
+        // old version
+        this.semiMajorAxis = canvas.width / 2 - 20; // 6.28
         this.semiMinorAxis = canvas.height / 2 - 20;
         this.lanes = lanes;
         this.carWidth = carWidth;
+
+           // Initialize start line position
+           this.startLine.x = this.centerX;
+           this.startLine.yTop = this.centerY - this.semiMinorAxis;
+           this.startLine.yBottom = this.centerY - (this.semiMinorAxis - lanes * carWidth);
+      
     }
 
     draw(context: CanvasRenderingContext2D) {
@@ -37,6 +50,7 @@ export class Track {
         }
 
         // Draw the start line
+       /*
         const startLineX = this.centerX;
         const startLineYStart = this.centerY - this.semiMinorAxis;
         const startLineYEnd = this.centerY - (this.semiMinorAxis - this.lanes * this.carWidth);
@@ -46,5 +60,14 @@ export class Track {
         context.strokeStyle = 'white';
         context.lineWidth = 3;
         context.stroke();
+        */
+        // new version Apr 22 - Draw the start line
+        context.beginPath();
+        context.moveTo(this.startLine.x, this.startLine.yTop);
+        context.lineTo(this.startLine.x, this.startLine.yBottom);
+        context.strokeStyle = 'white';
+        context.lineWidth = 3;
+        context.stroke();
+
     }
 }

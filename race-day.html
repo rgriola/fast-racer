@@ -4,22 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fast Racer</title>
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/race-day.css">
 </head>
 <body>
-    <h1>Fast Racer</h1>
-    <div id="controls">
-        <input type="text" id="player-name" placeholder="Enter your name" />
-        <input type="color" id="car-color" value="#ff0000" />
-        <button id="start-button">Start Race</button>
-    </div>
-    <div class="race-track">
-        <canvas id="gameCanvas" width="800" height="400"></canvas>
-        <div id="starting-line"></div>
-        <div id="cars-container"></div>
-    </div>
-    <div id="timer"></div>
-    <div id="results"></div>
-    <script type="module" src="./dist/main.js"></script>
+    <div class="container">
+        <header>
+            <!-- ...existing header content... -->
+            <div id="race-timer" class="race-timer">00:00.00</div>
+            <h1>Fast Racer</h1>
+        </header>
+        <nav>
+            
+        </nav>
+        <main> 
+            <aside>
+                <div id="Leaderboard">
+                <h2>Leaderboard</h2>
+                <div id="leaderboard-list">
+                    <dix class="leaderboard-item">Place</dix><div class="leaderboard-item">Racer</div><div class="leaderboard-item">Car No.</div><div class="leaderboard-item">LAP</div><div class="leaderboard-item">MPH</div>
+                    <!-- Predefined placeholders for places 1–10 -->
+                    <div id="place-1">#1 - </div>
+                    <div id="place-2">#2 - </div>
+                    <div id="place-3">#3 - </div>
+                    <div id="place-4">#4 - </div>
+                    <div id="place-5">#5 - </div>
+                    <div id="place-6">#6 - </div>
+                    <div id="place-7">#7 - </div>
+                    <div id="place-8">#8 - </div>
+                    <div id="place-9">#9 - </div>
+                    <div id="place-10">#10 - </div>
+                </div>
+                </div>
+            </aside>
+            <section>
+                    <div class="race-track"><div>
+                        <div class="controls">
+                            <button id="start-button" class="game-button">Start Race</button>
+                            <button id="pause-button" class="game-button" disabled>Pause</button>
+                        </div>
+                    <canvas id="gameCanvas" width="800" height="400"></canvas>
+                    </div>
+            
+            </section>
+            <div class="clear"></div>
+        </main>
+        <footer></footer>
+    </div> <!--container-->
+    <script>
+     
+    // Security and initialization function
+    window.onload = function() {
+        // Security checks
+        const playerName = localStorage.getItem('playerName');
+        const playerCarNumber = localStorage.getItem('playerCarNumber');
+        
+        if (!playerName || !playerCarNumber) {
+            alert('You must enter your name and car number on the landing page first!');
+            window.location.href = 'index.html';
+            return;
+        }
+
+        // Initialize player display
+        const playerNameDisplay = document.getElementById('player-name-display');
+        if (playerNameDisplay) {
+            playerNameDisplay.textContent = `Racer: ${playerName} (#${playerCarNumber})`;
+        }
+
+    };
+
+    </script>
+    <script type="module" src="./dist/main.js" defer></script>
 </body>
 </html>

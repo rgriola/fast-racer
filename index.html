@@ -1,21 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fast - Racer</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Racer</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script>
+        function validateAndStartRace() {
+            const playerName = document.getElementById('player-name').value.trim();
+            const carNumber = document.getElementById('car-number').value.trim();
+            const nameRegex = /^[a-zA-Z0-9]+$/; // Only letters and numbers for the name
+            const numberRegex = /^[0-9]{1,2}$/; // Only numbers (0-99) for the car number
+
+            if (!nameRegex.test(playerName)) {
+                alert('Please enter a valid name (letters and numbers only).');
+                return;
+            }
+
+            if (!numberRegex.test(carNumber)) {
+                alert('Please enter a valid car number (0-99).');
+                return;
+            }
+
+            // Store the player's name and car number in localStorage
+            localStorage.setItem('playerName', playerName);
+            localStorage.setItem('playerCarNumber', carNumber);
+            window.location.href = 'race-day.html';
+        }
+
+        function updatePreview() {
+            const playerName = document.getElementById('player-name').value.trim();
+            const carNumber = document.getElementById('car-number').value.trim();
+            const carColor = document.getElementById('car-color').value;
+
+            // Update the title
+            const title = document.getElementById('title');
+            title.textContent = playerName ? `${playerName}'s Fast Racer` : 'Fast Racer';
+
+            // Update the car preview
+            const carDisplay = document.getElementById('car-display');
+            const carNumberDisplay = document.getElementById('car-number-display');
+            carDisplay.style.backgroundColor = carColor;
+            carNumberDisplay.textContent = carNumber || '';
+        }
+    </script>
 </head>
 <body>
-  <div class="landing-page">
-    <h1>Welcome to Fast - Racer</h1>
-    <p>Get ready for the ultimate racing experience!</p>
-    <button onclick="startRace()">Start Your Engines</button>
-  </div>
-  <script>
-    function startRace() {
-      window.location.href = "race-day.html";
-    }
-  </script>
+    <h1 id="title">Fast Racer</h1>
+    <div class="inputbox">
+        <label for="player-name">Fast Racer Name:</label>
+        <input type="text" id="player-name" placeholder="Be Creative" oninput="updatePreview()" />
+    </div>
+<div class="inputbox">
+    <label for="car-number">Racer Number:</label>
+    <input type="text" id="car-number" placeholder="0 to 99" maxlength="2" oninput="updatePreview()" />
+</div>
+<div class="inputbox">
+    <label for="car-color">Racer Color:</label>
+    <input type="color" id="car-color" value="#ff0000" onchange="updatePreview()" />
+</div>
+    <div class="inputbox" id="car-preview">
+        <div id="car-display">
+            <span id="car-number-display"></span>
+        </div>
+    </div>
+    <button onclick="validateAndStartRace()">Start Race</button>
 </body>
 </html>
