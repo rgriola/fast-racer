@@ -1,33 +1,16 @@
 # Dependencies
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+dist/
 
 # TypeScript
-dist/
 *.tsbuildinfo
 
 # IDE
 .vscode/
 .idea/
-*.swp
-*.swo
 
-# macOS
+# OS
 .DS_Store
-.AppleDouble
-.LSOverride
 
 # Logs
-logs
 *.log
-
-# Environment variables
-.env
-.env.local
-.env.*.local
-
-# Build
-build/
-out/
